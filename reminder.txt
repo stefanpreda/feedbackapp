@@ -1,4 +1,5 @@
 sudo docker stack deploy -c docker-stack.yml feedback-app
 
+In each folder run with names: result, feedback, worker
 sudo docker build -t <name> .
 
