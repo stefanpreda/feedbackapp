@@ -1,0 +1,4 @@
+sudo docker stack deploy -c docker-stack.yml feedback-app
+
+sudo docker build -t <name> .
+

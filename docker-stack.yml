@@ -1,0 +1,83 @@
+version: "3"
+services:
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379"
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  db:
+    image: postgres:9.4
+    container_name: db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+  
+  feedback:
+    image: feedback
+    container_name: feedback
+    ports:
+      - 5000:4200
+      - 4201:4201
+    networks:
+      - frontend
+    depends_on:
+      - redis
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+
+  result:
+    image: result
+    container_name: result
+    ports:
+      - 5001:4100
+      - 4101:4101
+    networks:
+      - backend
+    depends_on:
+      - db
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  worker:
+    image: worker
+    container_name: worker
+    networks:
+      - frontend
+      - backend
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels: [APP=FEEDBACK]
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+     
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
