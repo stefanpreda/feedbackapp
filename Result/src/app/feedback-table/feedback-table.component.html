@@ -1,0 +1,50 @@
+<!DOCTYPE html>         
+<html>            
+  <head> <!-- www.techstrikers.com -->             
+    <title>Submitted feedbacks</title>
+    <style>
+      table, th , td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+      table tr:nth-child(odd) {
+        background-color: #f1f1f1;
+      }
+      table tr:nth-child(even) {
+        background-color: #ffffff;
+      }
+    </style>      
+  </head>
+  <body style="background-color:#DDE4E9;font-family:arial;">            
+      <fieldset style="background-color:#DDE4E9;">                        
+        <legend>Results</legend>             
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Service Name</th>
+              <th>Timeliness</th>
+              <th>Quality</th>
+              <th>Overall satisfaction</th>
+              <th>Use service again</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of feedbacks">
+              <td>{{ feedback.name }}</td>
+              <td>{{ feedback.age }}</td>
+              <td>{{ feedback.service_name }}</td>
+              <td>{{ feedback.timeliness }}</td>
+              <td>{{ feedback.quality }}</td>
+              <td>{{ feedback.overall_satisfaction }}</td>
+              <td>{{ feedback.use_service_again }}</td>
+            </tr>
+          </tbody>
+        </table>            
+    </fieldset>             
+  </body>            
+</html>  
+
+
