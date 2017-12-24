@@ -1,0 +1,95 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Feedback Form</h1>
+    <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" required
+          [(ngModel)]="model.name" name="name">
+        </div>
+
+      <div class="form-group">
+        <label for="age">Age</label>
+          <input type="number" class="form-control" id="name" min="18" max="120" step="1"
+          [(ngModel)]="model.age" name="age">
+      </div>
+
+      <div class="form-group">
+          <label for="service_name">Service name</label>
+          <select class="form-control" id="service_name" required
+          [(ngModel)]="model.service_name" name="service_name">
+            <option *ngFor="let service_name of service_names" [value]="service_name">{{service_name}}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+          <label for="timeliness">How fast did you receive the service?</label>
+          <select class="form-control" id="timeliness" required
+          [(ngModel)]="model.timeliness" name="timeliness">
+            <option *ngFor="let timeliness of timelinesses" [value]="timeliness">{{timeliness}}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+          <label for="quality">Quality of the service</label>
+          <select class="form-control" id="quality" required
+          [(ngModel)]="model.quality" name="quality">
+            <option *ngFor="let quality of qualities" [value]="quality">{{quality}}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+          <label for="overall_satisfaction">Overall satisfaction after using the service</label>
+          <select class="form-control" id="overall_satisfaction" required
+          [(ngModel)]="model.overall_satisfaction" name="overall_satisfaction">
+            <option *ngFor="let overall_satisfaction of overall_satisfactions" [value]="overall_satisfaction">{{overall_satisfaction}}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+          <label for="use_service_again">Will you use the service again?</label>
+          <select class="form-control" id="use_service_again" required
+          [(ngModel)]="model.use_service_again" name="use_service_again">
+            <option *ngFor="let use_service_again of use_service_agains" [value]="use_service_again">{{use_service_again}}</option>
+          </select>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!feedbackForm.form.valid">Submit</button>
+
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+      <h2>You submitted the following:</h2>
+      <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ model.name }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Age</div>
+        <div class="col-xs-9 pull-left">{{ model.age }}</div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">Service name</div>
+        <div class="col-xs-9 pull-left">{{ model.service_name }}</div>
+      </div>
+      <div class="row">
+          <div class="col-xs-3">Timeliness</div>
+          <div class="col-xs-9 pull-left">{{ model.timeliness }}</div>
+      </div>
+      <div class="row">
+          <div class="col-xs-3">Quality</div>
+          <div class="col-xs-9 pull-left">{{ model.quality }}</div>
+      </div>
+      <div class="row">
+          <div class="col-xs-3">Overall satisfaction</div>
+          <div class="col-xs-9 pull-left">{{ model.overall_satisfaction }}</div>
+      </div>
+      <div class="row">
+            <div class="col-xs-3">Use service again</div>
+            <div class="col-xs-9 pull-left">{{ model.use_service_again }}</div>
+      </div>
+      <br>
+      <!-- <button class="btn btn-primary" (click)="submitted=false">Edit</button> -->
+    </div>
+</div>
